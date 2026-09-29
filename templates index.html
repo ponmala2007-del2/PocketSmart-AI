@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PocketSmart AI</title>
+</head>
+<body>
+    <h1>PocketSmart AI</h1>
+    <h2>Smart Budget & Recommendation Assistant</h2>
+
+    <input type="text" id="message" placeholder="Ask something...">
+    <button onclick="askAI()">Ask Gemini</button>
+
+    <p id="response"></p>
+
+    <script>
+        async function askAI() {
+            const message = document.getElementById("message").value;
+
+            const result = await fetch("/ask", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ message: message })
+            });
+
+            const data = await result.json();
+            document.getElementById("response").innerText = data.response;
+        }
+    </script>
+</body>
+</html>
